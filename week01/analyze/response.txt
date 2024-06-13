@@ -1,0 +1,11 @@
+The big O notation for the funtion SortArray is:
+  * O(n^2)
+The big O notation for the StandardDeviation three implementations are:
+  1- StandardDeviation1 O(n) 
+  2- StandardDeviation2 O(n^2)
+  3- StandardDeviation3 O(n)
+What is the performance using big O notation for each function (based on both your predictions and the actual results)?
+  1- SearchSorted1 O(n)
+  2- SearchSorted2 O(log n)
+Which function has the better performance in the worst case?
+  1- SearchSorted2
