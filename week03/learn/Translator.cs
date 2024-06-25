@@ -1,30 +1,34 @@
 public class Translator
 {
+    private Dictionary<string, string> _words = new Dictionary<string, string>();
+
     public static void Run()
     {
         var englishToGerman = new Translator();
         englishToGerman.AddWord("House", "Haus");
         englishToGerman.AddWord("Car", "Auto");
         englishToGerman.AddWord("Plane", "Flugzeug");
-        Console.WriteLine(englishToGerman.Translate("Car")); // Auto
-        Console.WriteLine(englishToGerman.Translate("Plane")); // Flugzeug
-        Console.WriteLine(englishToGerman.Translate("Train")); // ???
+        Console.WriteLine(englishToGerman.Translate("Car"));   // Output: Auto
+        Console.WriteLine(englishToGerman.Translate("Plane")); // Output: Flugzeug
+        Console.WriteLine(englishToGerman.Translate("Train")); // Output: ???
     }
 
-    private Dictionary<string, string> _words = new();
-
     /// <summary>
-    /// Add the translation from 'from_word' to 'to_word'
-    /// For example, in a english to german dictionary:
-    /// 
-    /// my_translator.AddWord("book","buch")
+    /// Add the translation from 'fromWord' to 'toWord'
     /// </summary>
     /// <param name="fromWord">The word to translate from</param>
     /// <param name="toWord">The word to translate to</param>
-    /// <returns>fixed array of divisors</returns>
     public void AddWord(string fromWord, string toWord)
     {
-        // ADD YOUR CODE HERE
+        // check if the word already exists in the dictionary
+        if (_words.ContainsKey(fromWord))
+        {
+            Console.WriteLine($"'{fromWord}' is already added with translation");
+            return;
+        }
+
+        // add the translation to the dictionary
+        _words[fromWord] = toWord;
     }
 
     /// <summary>
@@ -34,7 +38,17 @@ public class Translator
     /// <returns>The translated word or "???" if no translation is available</returns>
     public string Translate(string fromWord)
     {
-        // ADD YOUR CODE HERE
-        return "";
+        string newWord;
+        // check if the word exists in the dictionary
+        if (_words.ContainsKey(fromWord))
+        {
+            newWord = _words[fromWord];
+        }
+        else
+        {
+            newWord = "???"; // return "???" if no translation is available
+        }
+
+        return newWord;
     }
 }
