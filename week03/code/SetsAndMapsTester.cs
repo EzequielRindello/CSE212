@@ -193,7 +193,56 @@ public static class SetsAndMapsTester
     private static bool IsAnagram(string word1, string word2)
     {
         // Todo Problem 3 - ADD YOUR CODE HERE
-        return false;
+        // normalize the words by removing spaces and converting to lowercase
+        word1 = word1.Replace(" ", "").ToLower();
+        word2 = word2.Replace(" ", "").ToLower();
+
+        // if the lengths are different they cannot be anagrams
+        if (word1.Length != word2.Length)
+        {
+            return false;
+        }
+
+        // create dictionaries to count the frequency of each character
+        var charCount1 = new Dictionary<char, int>();
+        var charCount2 = new Dictionary<char, int>();
+
+        // count characters for the first word
+        foreach (var ch in word1)
+        {
+            if (charCount1.ContainsKey(ch))
+            {
+                charCount1[ch]++;
+            }
+            else
+            {
+                charCount1[ch] = 1;
+            }
+        }
+
+        // count characters for the second word
+        foreach (var ch in word2)
+        {
+            if (charCount2.ContainsKey(ch))
+            {
+                charCount2[ch]++;
+            }
+            else
+            {
+                charCount2[ch] = 1;
+            }
+        }
+
+        // compare the dictionaries
+        foreach (var kvp in charCount1)
+        {
+            if (!charCount2.ContainsKey(kvp.Key) || charCount2[kvp.Key] != kvp.Value)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /// <summary>
