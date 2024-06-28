@@ -153,6 +153,19 @@ public static class SetsAndMapsTester
         {
             var fields = line.Split(",");
             // Todo Problem 2 - ADD YOUR CODE HERE
+            if (fields.Length > 3)
+            {
+                var degree = fields[3].Trim();
+
+                if (degrees.ContainsKey(degree))
+                {
+                    degrees[degree]++;
+                }
+                else
+                {
+                    degrees[degree] = 1;
+                }
+            }
         }
 
         return degrees;
