@@ -134,7 +134,32 @@ public class LinkedList : IEnumerable<int>
     /// </summary>
     public void Remove(int value)
     {
-        // TODO Problem 3
+        Node? current = _head;
+
+        while (current is not null)
+        {
+            if (current.Data == value)
+            {
+                // If the node to remove is the head
+                if (current == _head)
+                {
+                    RemoveHead();
+                }
+                // If the node to remove is the tail
+                else if (current == _tail)
+                {
+                    RemoveTail();
+                }
+                // If the node to remove is in the middle
+                else
+                {
+                    current.Prev!.Next = current.Next; // Connect previous node to the next node
+                    current.Next!.Prev = current.Prev; // Connect next node to the previous node
+                }
+                return; // Exit after removing the node
+            }
+            current = current.Next; // Move to the next node
+        }
     }
 
     /// <summary>
@@ -142,7 +167,16 @@ public class LinkedList : IEnumerable<int>
     /// </summary>
     public void Replace(int oldValue, int newValue)
     {
-        // TODO Problem 4
+        Node? curr = _head;
+
+        while (curr is not null)
+        {
+            if (curr.Data == oldValue)
+            {
+                curr.Data = newValue; // Replace the value
+            }
+            curr = curr.Next; // Move to the next node
+        }
     }
 
     /// <summary>
