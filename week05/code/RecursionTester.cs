@@ -313,18 +313,39 @@ public static class RecursionTester
     /// Use recursion to Print all paths that start at (0,0) and end at the
     /// 'end' square.
     /// </summary>
-    public static void SolveMaze(Maze maze, int x = 0, int y = 0, List<ValueTuple<int, int>>? currPath = null)
+    public static void SolveMaze(Maze maze, int x = 0, int y = 0, List<(int, int)>? currPath = null)
     {
-        // If this is the first time running the function, then we need
-        // to initialize the currPath list.
+        // if this is the first time running the function then we initialize currPath list.
         if (currPath == null)
-            currPath = new List<ValueTuple<int, int>>();
+            currPath = new List<(int, int)>();
 
-        // currPath.Add((1,2)); // Use this syntax to add to the current path
+        // add current position to the path
+        currPath.Add((x, y));
 
-        // TODO Start Problem 5
-        // ADD CODE HERE
+        // check if we have reached the end
+        if (maze.IsEnd(x, y))
+        {
+            Console.WriteLine(string.Join(", ", currPath));
+            currPath.RemoveAt(currPath.Count - 1); // backtrack
+            return;
+        }
 
-        // Console.WriteLine(currPath.AsString()); // Use this to print out your path when you find the solution
+        // we define possible movements: right, down, left, up
+        var directions = new (int, int)[] { (0, 1), (1, 0), (0, -1), (-1, 0) };
+
+        foreach (var (dx, dy) in directions)
+        {
+            int newX = x + dx;
+            int newY = y + dy;
+
+            // check if the move is valid
+            if (maze.IsValidMove(currPath, newX, newY))
+            {
+                SolveMaze(maze, newX, newY, currPath);
+            }
+        }
+
+        // backtrack: remove the current position from the path
+        currPath.RemoveAt(currPath.Count - 1);
     }
 }
