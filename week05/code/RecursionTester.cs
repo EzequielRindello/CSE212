@@ -294,7 +294,19 @@ public static class RecursionTester
     /// </summary>
     public static void WildcardBinary(string pattern)
     {
-        // TODO Start Problem 4
+        // we find the first occurrence of '*'
+        int index = pattern.IndexOf('*');
+
+        // if no wildcard is found print the pattern
+        if (index == -1)
+        {
+            Console.WriteLine(pattern);
+            return;
+        }
+
+        // we replace * with 0 and 1 and solve the resulting patterns
+        WildcardBinary(pattern.Substring(0, index) + '0' + pattern.Substring(index + 1));
+        WildcardBinary(pattern.Substring(0, index) + '1' + pattern.Substring(index + 1));
     }
 
     /// <summary>
